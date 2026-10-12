@@ -1,0 +1,15 @@
+{
+  "name": "endformdev",
+  "description": "Let your agent run and maintain your Playwright tests on Endform.",
+  "owner": {
+    "name": "Endform",
+    "url": "https://endform.dev"
+  },
+  "plugins": [
+    {
+      "name": "endform",
+      "description": "Endform runs your existing Playwright suite in parallel, up to 10x faster, and helps you keep it healthy as it grows. This plugin lets your agent run your tests on Endform and find failing, flaky, and slow tests, then fix or quarantine them or debug a test step by step.",
+      "source": "./"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "endform",
+  "description": "Endform runs your existing Playwright suite in parallel, up to 10x faster, and helps you keep it healthy as it grows. This plugin lets your agent run your tests on Endform and find failing, flaky, and slow tests, then fix or quarantine them or debug a test step by step.",
+  "author": {
+    "name": "Endform",
+    "url": "https://endform.dev"
+  },
+  "homepage": "https://endform.dev/docs",
+  "repository": "https://github.com/endformdev/skills",
+  "license": "MIT",
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e-testing",
+    "flaky-tests",
+    "ci",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Endform",
+        "shortDescription": "Run and fix Playwright tests",
+        "longDescription": "Endform runs your existing Playwright suite in parallel, up to 10x faster, and helps you keep it healthy as it grows. This plugin lets your agent run your tests on Endform and find failing, flaky, and slow tests, then fix or quarantine them or debug a test step by step. It also adds the Endform MCP server, so your agent can query your test runs and debug failing tests.",
+        "developerName": "Endform",
+        "category": "Developer Tools",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+          "Set up Endform and run our e2e tests",
+          "Which of our e2e tests are flaky?",
+          "Fix the tests that failed in the last CI run"
+        ],
+        "websiteURL": "https://endform.dev",
+        "privacyPolicyURL": "https://endform.dev/privacy",
+        "termsOfServiceURL": "https://endform.dev/terms",
+        "brandColor": "#38C874",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      }
+    }
+  }
+}

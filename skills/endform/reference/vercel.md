@@ -1,0 +1,12 @@
+# Test Vercel previews with Endform
+
+On GitHub Actions, Endform can run the tests against the Vercel preview of each pull request. The `endformdev/actions/run-with-vercel-deployment` action waits for the preview and passes its URL to the tests.
+
+1. The tests run against the Vercel preview, so `baseURL` must read `process.env.BASE_URL`, even when `webServer` starts a dev server. Then start `webServer` only when `BASE_URL` is not set, so local runs keep working.
+2. Add the `endformdev/actions/run-with-vercel-deployment` action with `set-url-env-var: BASE_URL` before `npx endform@latest test`, as shown in the Vercel section of https://endform.dev/docs/_llms-txt/github-actions-ci-and-vercel.txt. Endform reports on the Vercel check only when the workflow uses this action.
+   - If a workflow already runs `playwright test`, directly or through a package script such as `pnpm test:e2e`, add the action before it and replace that command with `npx endform@latest test`, leaving the package script as it is. Keep the other steps, and drop what Endform replaces: browser installs and caches, `--shard` matrix jobs, and the job that merges their blob reports. Otherwise add a workflow as the docs show.
+   - The workflow must run on pull requests, since previews exist only for them.
+   - Take the Vercel project name from `.vercel/project.json`, or ask for it.
+   - The action authenticates only through the Endform GitHub App with OIDC: add `id-token: write` to the workflow's permissions and keep `contents: read`, since listing any permission removes the ones not listed. Do not add an API key.
+3. Make sure the Endform GitHub App and Vercel are connected with `npx endform@latest connect github --organization-id <organization-id>` and `npx endform@latest connect vercel --organization-id <organization-id>`. Each says so when the integration is already connected. Otherwise it prints a URL where the install is finished in the browser and tells you which command to run next, so show the URL and follow its output until it is connected. These commands need a login: if one says you are not logged in, run `npx endform@latest login`, show the URL it prints, follow its output until the login completes, then run the command again.
+4. If the tests read other environment variables, such as app credentials, list them and ask for them to be added as GitHub Actions secrets. Reference them in the workflow, never write their values.

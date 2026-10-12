@@ -1,0 +1,25 @@
+{
+  "name": "endform",
+  "displayName": "Endform",
+  "description": "Endform runs your existing Playwright suite in parallel, up to 10x faster, and helps you keep it healthy as it grows. This plugin lets your agent run your tests on Endform and find failing, flaky, and slow tests, then fix or quarantine them or debug a test step by step.",
+  "author": {
+    "name": "Endform",
+    "url": "https://endform.dev"
+  },
+  "homepage": "https://endform.dev/docs",
+  "repository": "https://github.com/endformdev/skills",
+  "license": "MIT",
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e-testing",
+    "flaky-tests",
+    "ci",
+    "mcp"
+  ],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://endform.dev/docs",
+  "supportUrl": "https://endform.dev/support",
+  "privacyPolicyUrl": "https://endform.dev/privacy",
+  "termsOfServiceUrl": "https://endform.dev/terms"
+}

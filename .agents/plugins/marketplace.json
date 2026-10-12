@@ -1,0 +1,20 @@
+{
+  "name": "endformdev",
+  "interface": {
+    "displayName": "Endform"
+  },
+  "plugins": [
+    {
+      "name": "endform",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
