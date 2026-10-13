@@ -2,7 +2,7 @@
   "mcpServers": {
     "endform": {
       "command": "npx",
-      "args": ["-y", "endform@latest", "mcp"]
+      "args": ["-y", "endform@0.81.4", "mcp"]
     }
   }
 }
