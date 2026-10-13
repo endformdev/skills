@@ -57,6 +57,10 @@ claude mcp add --transport stdio --scope local endform -- npx -y endform@latest 
 
 For Cursor and other agents, see the [MCP server docs](https://endform.dev/docs/reference/mcp-server).
 
+## Data and privacy
+
+The plugin runs the Endform CLI from npm, which sends the Playwright tests you select, with what they need to run, and their results to Endform. See the [privacy policy](https://endform.dev/privacy) for more details.
+
 ## Repository layout
 
 ```
@@ -67,7 +71,6 @@ mcp.json                     MCP server for those agents
 .agents/plugins/             Marketplace for Codex
 .claude-plugin/              Plugin and marketplace for Claude Code
 .mcp.json                    MCP server for Claude Code
-assets/logo.png              Logo for plugin directories
 ```
 
 ## License
