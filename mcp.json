@@ -4,7 +4,7 @@
     "endform": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "endform@0.81.4", "mcp"]
+      "args": ["-y", "endform@0.81.5", "mcp"]
     }
   }
 }
