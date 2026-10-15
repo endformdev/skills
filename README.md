@@ -13,6 +13,8 @@ claude plugin marketplace add endformdev/skills
 claude plugin install endform@endformdev
 ```
 
+Claude Code doesn't update plugins from this marketplace automatically. To turn that on, run `/plugin`, go to **Marketplaces**, select `endformdev`, and select **Enable auto-update**. To update once, run `claude plugin update endform@endformdev`.
+
 ### Codex
 
 ```bash
@@ -32,7 +34,7 @@ Install the skill with [skills.sh](https://skills.sh):
 npx skills add endformdev/skills --skill endform
 ```
 
-Pick your agents when prompted. Add `-g` to install it for all your projects.
+Pick your agents when prompted, or pass them with `-a`, for example `-a claude-code`. Add `-g` to install it for all your projects.
 
 ## Use
 
@@ -43,7 +45,7 @@ Ask your agent, for example:
 - "The checkout test only fails in CI, can you look into it?"
 - "Quarantine the flaky search test so it stops blocking our PRs"
 
-In Claude Code you can also call the skill directly with `/endform:endform`.
+You can also call the skill directly: `/endform` in Claude Code and Cursor, `/endform:endform` in VS Code, and `$endform` in Codex.
 
 ## MCP server
 
@@ -59,7 +61,7 @@ For Cursor and other agents, see the [MCP server docs](https://endform.dev/docs/
 
 ## Data and privacy
 
-The plugin runs the Endform CLI from npm, which sends the Playwright tests you select, with what they need to run, and their results to Endform. See the [privacy policy](https://endform.dev/privacy) for more details.
+The plugin runs the Endform CLI from npm, which sends the Playwright tests you select, with what they need to run, and their results to Endform. See our [privacy policy](https://endform.dev/privacy) for more details.
 
 ## Repository layout
 

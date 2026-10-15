@@ -34,6 +34,7 @@
         "websiteURL": "https://endform.dev",
         "privacyPolicyURL": "https://endform.dev/privacy",
         "termsOfServiceURL": "https://endform.dev/terms",
+        "supportURL": "https://endform.dev/support",
         "brandColor": "#38C874",
         "logo": "./assets/logo.png",
         "composerIcon": "./assets/logo.png"
