@@ -20,7 +20,7 @@ Endform is a drop-in replacement for the Playwright test runner: `npx endform@la
      },
    });
    ```
-   - `fullyParallel: true` lets Endform run every test in parallel. Endform only reads `fullyParallel` per project, so `test.describe.configure({ mode: "serial" })` and `test.describe.serial` do not keep tests together. If tests in a file share `beforeAll` state or worker fixtures, move those files to a project with `fullyParallel: false` and exclude them from the other projects with `testIgnore`. Each of its files then runs on one machine, in order. A retry reruns only the failed tests, so setup that one test leaves for the next belongs in `beforeAll` or a fixture.
+   - `fullyParallel: true` lets Endform run every test in parallel. Endform only reads `fullyParallel` per project, so `test.describe.configure({ mode: "serial" })` and `test.describe.serial` do not keep tests together. If tests in a file share `beforeAll` state or worker fixtures, move those files to a project with `fullyParallel: false` and exclude them from the other projects with `testIgnore`. Each file in that project then runs on one machine, in order. A retry reruns only the failed tests, so setup that one test leaves for the next belongs in `beforeAll` or a fixture.
    - Endform retries only as often as `retries` allows. Keep the value if the config already sets one.
    - If the config starts a dev server through `webServer`, leave `webServer` and `baseURL` as they are, unless the tests will run against Vercel previews. Otherwise read `baseURL` from `BASE_URL`, falling back to the URL the suite uses today, and if none is in the repo, ask whether to add a `webServer` that starts the local dev server or to use a deployed URL such as staging or a Vercel preview.
    - `trace: "retain-on-failure"` gives failed tests a trace in the Endform dashboard.
@@ -37,7 +37,7 @@ Endform is a drop-in replacement for the Playwright test runner: `npx endform@la
 ## Requirements
 
 - Playwright in TypeScript or JavaScript, one of the latest three minor versions. Node 22 or newer locally.
-- Tests must not rely on state another test creates. With `fullyParallel: false` each file runs on its own machine, with `fullyParallel: true` each test does.
+- Each test must set up what it needs itself, and not depend on an earlier test to do it. With `fullyParallel: true`, every test runs on a separate machine. With `fullyParallel: false`, every file runs on a separate machine, and its tests run in order. When a test fails, the retry runs only that test, not the tests before it. To share setup between tests in a file, use `beforeAll` or a worker fixture.
 - Each test is limited to 4 minutes, each file to 15 minutes when `fullyParallel` is false.
 - `.only()` and `.fail()` are not supported.
 
