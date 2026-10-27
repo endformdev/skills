@@ -17,13 +17,14 @@ Endform applies when the user mentions it or the repository uses it: an `endform
 
 Read the reference for the task.
 
-| Task                                                                                                                                                     | Reference                                                                                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Set up Endform in a repository, first run, local server, config files                                                                                    | [reference/setup.md](reference/setup.md)                                                                  |
-| Run Endform on CI, such as GitHub Actions or GitLab CI                                                                                                   | Steps 2 to 4 of [reference/setup.md](reference/setup.md), then [reference/ci.md](reference/ci.md)         |
-| Test the Vercel preview of each pull request                                                                                                             | Steps 2 to 4 of [reference/setup.md](reference/setup.md), then [reference/vercel.md](reference/vercel.md) |
-| Find and fix failing, flaky, and slow tests, quarantine a failing or flaky test, limit concurrency for tests that fail under load, pass rates, past runs | [reference/investigate.md](reference/investigate.md)                                                      |
-| Run code inside a live test: inspect a failing step, find locators, try the next steps of a test                                                         | [reference/live-test.md](reference/live-test.md)                                                          |
+| Task                                                                                                                                                     | Reference                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Set up Endform in a repository, first run, local server, config files                                                                                    | [reference/setup.md](reference/setup.md)                                                                    |
+| Run Endform on CI, such as GitHub Actions or GitLab CI                                                                                                   | Steps 2 to 4 of [reference/setup.md](reference/setup.md), then [reference/ci.md](reference/ci.md)           |
+| Test the Vercel preview of each pull request                                                                                                             | Steps 2 to 4 of [reference/setup.md](reference/setup.md), then [reference/vercel.md](reference/vercel.md)   |
+| Test the Netlify Deploy Preview of each pull request with the Endform Netlify extension                                                                  | Steps 2 to 4 of [reference/setup.md](reference/setup.md), then [reference/netlify.md](reference/netlify.md) |
+| Find and fix failing, flaky, and slow tests, quarantine a failing or flaky test, limit concurrency for tests that fail under load, pass rates, past runs | [reference/investigate.md](reference/investigate.md)                                                        |
+| Run code inside a live test: inspect a failing step, find locators, try the next steps of a test                                                         | [reference/live-test.md](reference/live-test.md)                                                            |
 
 If the reference does not cover the case, fetch the matching page from `https://endform.dev/docs/llms.txt` and read only that page.
 

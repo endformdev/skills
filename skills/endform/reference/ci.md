@@ -6,6 +6,7 @@
    - A local server started in CI through `webServer`: no `BASE_URL` needed.
    - A remote server such as staging: set `BASE_URL` in the CI config to its URL, and ask for it if it is not in the repo.
    - The Vercel preview of each pull request, on GitHub Actions only: follow [vercel.md](vercel.md) instead of the remaining steps, or the Vercel section of https://endform.dev/docs/_llms-txt/github-actions-ci-and-vercel.txt.
+   - The Netlify Deploy Preview of each pull request: the Endform Netlify extension runs the tests, so follow [netlify.md](netlify.md) instead of the remaining steps and add no CI job.
 4. Keep the triggers of a CI config that already runs Playwright. If it runs on only pull requests or only pushes to the default branch, say so in your summary. A new CI config runs on both pull requests and pushes to the default branch.
 5. If it is GitHub Actions:
    - After the other changes, ask which authentication to use, and recommend the GitHub App. The Endform GitHub App needs no secret and is required for Vercel previews, but someone has to be able to install GitHub Apps on the repository. An API key is stored as the `ENDFORM_API_KEY` secret; with it, Vercel previews are not available, so the tests run against a staging URL instead.
