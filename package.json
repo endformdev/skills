@@ -1,0 +1,8 @@
+{
+  "name": "endform-plugin",
+  "version": "0.82.2",
+  "private": true,
+  "dependencies": {
+    "endform": "0.82.2"
+  }
+}
