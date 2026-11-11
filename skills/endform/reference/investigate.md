@@ -48,6 +48,8 @@ Filter to failures and keep limits small. Summarize an error to its first meanin
    npx endform@latest test tests/checkout.spec.ts:12 --repeat-each 20 --retries 0
    ```
 
+   With the MCP tools, call `suite_run_start` with `testFileFilters: ["tests/checkout.spec.ts:12"]`, `repeatEach: 20`, and `retries: 0`.
+
 ## Quarantine a test
 
 A quarantined test still runs on every suite run, but its failures no longer fail the suite. It runs once without retries, and its real outcomes stay in `samples` and `analytics`. Use it for a failing or flaky test while it is being fixed. Prefer it over `test.skip()`, `test.fixme()`, or deleting the test, which stop the results that show when the test recovers.
