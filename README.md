@@ -49,7 +49,7 @@ You can also call the skill directly: `/endform` in Claude Code and Cursor, `/en
 
 ## MCP server
 
-The Endform MCP server lets your agent query your test runs and debug failing tests on Endform. It comes in two versions.
+The Endform MCP server lets your agent query your test runs and debug failing tests on Endform. It comes in two versions:
 
 |                     | Local                                           | Remote                                                  |
 | ------------------- | ----------------------------------------------- | ------------------------------------------------------- |
@@ -61,7 +61,7 @@ The Endform MCP server lets your agent query your test runs and debug failing te
 
 ### Local
 
-The Claude Code, Codex, and VS Code plugins add it for you. To add it without the plugin, in Claude Code:
+The Codex and VS Code plugins add it for you. To add it in Claude Code:
 
 ```bash
 claude mcp add --transport stdio --scope local endform -- npx -y endform@latest mcp
@@ -73,7 +73,7 @@ For Cursor and other agents, see the [MCP server docs](https://endform.dev/docs/
 
 Add `https://endform.dev/mcp` as a remote MCP server in your agent and sign in with your Endform account. You choose all your organizations or a single one when you connect.
 
-In Claude Code, add it and then run `/mcp` to sign in:
+The Claude Code plugin adds it for you: run `/mcp` to sign in. To add it without the plugin, in Claude Code, add it and then run `/mcp`:
 
 ```bash
 claude mcp add --transport http endform-remote https://endform.dev/mcp

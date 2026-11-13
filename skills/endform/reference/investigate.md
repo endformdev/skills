@@ -48,7 +48,7 @@ Filter to failures and keep limits small. Summarize an error to its first meanin
    npx endform@latest test tests/checkout.spec.ts:12 --repeat-each 20 --retries 0
    ```
 
-   With the MCP tools, call `suite_run_start` with `testFileFilters: ["tests/checkout.spec.ts:12"]`, `repeatEach: 20`, and `retries: 0`.
+   With the local MCP server, call `suite_run_start` with `testFileFilters: ["tests/checkout.spec.ts:12"]`, `repeatEach: 20`, and `retries: 0`.
 
 ## Quarantine a test
 
