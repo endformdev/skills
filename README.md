@@ -49,15 +49,61 @@ You can also call the skill directly: `/endform` in Claude Code and Cursor, `/en
 
 ## MCP server
 
-The Endform MCP server lets your agent query your test runs and debug failing tests on Endform. The Claude Code, Codex, and VS Code plugins add it for you.
+The Endform MCP server lets your agent query your test runs and debug failing tests on Endform. It comes in two versions.
 
-To add it without the plugin, in Claude Code:
+|                     | Local                                           | Remote                                                  |
+| ------------------- | ----------------------------------------------- | ------------------------------------------------------- |
+| Runs                | On your machine, through `npx`                  | On Endform, at `https://endform.dev/mcp`                |
+| Best for            | Coding agents working in your repository        | Agents that can't run local commands, such as claude.ai |
+| Sign-in             | `npx endform@latest login` or `ENDFORM_API_KEY` | Your Endform account, in the browser                    |
+| Organizations       | Any you can access                              | All of yours, or one you choose when you connect        |
+| Live test debugging | Yes                                             | No, it needs your local checkout                        |
+
+### Local
+
+The Claude Code, Codex, and VS Code plugins add it for you. To add it without the plugin, in Claude Code:
 
 ```bash
 claude mcp add --transport stdio --scope local endform -- npx -y endform@latest mcp
 ```
 
 For Cursor and other agents, see the [MCP server docs](https://endform.dev/docs/reference/mcp-server).
+
+### Remote
+
+Add `https://endform.dev/mcp` as a remote MCP server in your agent and sign in with your Endform account. You choose all your organizations or a single one when you connect.
+
+In Claude Code, add it and then run `/mcp` to sign in:
+
+```bash
+claude mcp add --transport http endform-remote https://endform.dev/mcp
+```
+
+In Codex:
+
+```bash
+codex mcp add endform-remote --url https://endform.dev/mcp
+codex mcp login endform-remote
+```
+
+In VS Code, add this to `.vscode/mcp.json` and sign in when prompted:
+
+```json
+{
+  "servers": {
+    "endform-remote": {
+      "type": "http",
+      "url": "https://endform.dev/mcp"
+    }
+  }
+}
+```
+
+### Using both
+
+If you use the local server in one agent and the remote server in another, there's nothing else to set up: each agent has its own connection.
+
+You can also add both to one agent by giving them different names, as the commands above do. It's usually better to pick one: local if the agent can run commands, remote if it can't.
 
 ## Data and privacy
 
