@@ -22,6 +22,15 @@ codex plugin marketplace add endformdev/skills
 codex plugin add endform@endformdev
 ```
 
+### Antigravity
+
+```bash
+git clone https://github.com/endformdev/skills endform-skills
+agy plugin install ./endform-skills
+```
+
+Then run `/plugin`, expand **endform** under **Installed**, and choose **Sign in**.
+
 ### VS Code
 
 In VS Code, enable `chat.plugins.enabled`, run **Chat: Install Plugin From Source** from the Command Palette, and enter `https://github.com/endformdev/skills`.
@@ -73,7 +82,7 @@ For Cursor and other agents, see the [MCP server docs](https://endform.dev/docs/
 
 Add `https://endform.dev/mcp` as a remote MCP server in your agent and sign in with your Endform account. You choose all your organizations or a single one when you connect.
 
-The Claude Code plugin adds it for you: run `/mcp` to sign in. To add it without the plugin, in Claude Code, add it and then run `/mcp`:
+The Claude Code and Antigravity plugins add it for you: run `/mcp` in Claude Code or `/plugin` in Antigravity to sign in. To add it without the plugin, in Claude Code, add it and then run `/mcp`:
 
 ```bash
 claude mcp add --transport http endform-remote https://endform.dev/mcp
@@ -119,6 +128,8 @@ mcp.json                     MCP server for those agents
 .agents/plugins/             Marketplace for Codex
 .claude-plugin/              Plugin and marketplace for Claude Code
 .mcp.json                    MCP server for Claude Code
+.antigravity-plugin/         Plugin manifest for Antigravity
+mcp_config.json              MCP server for Antigravity
 ```
 
 ## License
