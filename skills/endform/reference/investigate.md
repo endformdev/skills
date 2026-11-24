@@ -6,7 +6,7 @@ Two datasets: `suite-runs` is one Endform run of a suite, `test-runs` is one tes
 
 ## analytics
 
-`--metric` is `count`, `pass-rate`, or `average-duration`. `--group-by` is `outcome`, `branch`, `test`, or `project`. Suite runs cannot group by test or project. The response has an `interval`, a `unit`, and one series per group.
+`--metric` is `count`, `pass-rate`, or `average-duration`. `--group-by` is `outcome`, `branch`, `test`, or `project`. Suite runs cannot group by test or project. The response has an `interval`, a `unit`, and one series per group. When grouped by test, `group` is the test ID and `test` gives its file, describes, and name.
 
 ```bash
 npx endform@latest analytics suite-runs --metric count --group-by outcome
