@@ -26,6 +26,8 @@ npx endform@latest samples test-runs --where 'testRun.durationSeconds > 30' --li
 npx endform@latest samples test-runs --where 'suiteRun.id = sr_123, testRun.outcome = fail'
 ```
 
+When `analytics` or `samples` finds nothing, the response includes `organizationHasRuns`: `true` means the organization has runs but none match, and `false` means it has never run its own tests.
+
 ## Filters
 
 `--where` takes comma-separated `key operator value` clauses. Run `npx endform@latest samples --help` for the complete list of keys and operators. The keys map directly to response paths, so a filter on `testRun.outcome` reads the same field in the output. Suite run outcomes are `pass` or `fail`, test run and attempt outcomes can also be `skip`, durations are seconds.
