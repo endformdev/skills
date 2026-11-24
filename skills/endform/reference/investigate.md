@@ -26,6 +26,12 @@ npx endform@latest samples test-runs --where 'testRun.durationSeconds > 30' --li
 npx endform@latest samples test-runs --where 'suiteRun.id = sr_123, testRun.outcome = fail'
 ```
 
+When a check fails, filter by the commit the check ran on:
+
+```bash
+npx endform@latest samples test-runs --where 'commitSha = <head-sha>, testRun.outcome = fail' --period 30D
+```
+
 When `analytics` or `samples` finds nothing, the response includes `organizationHasRuns`: `true` means the organization has runs but none match, and `false` means it has never run its own tests.
 
 ## Filters
