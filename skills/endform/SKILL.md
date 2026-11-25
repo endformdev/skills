@@ -26,13 +26,13 @@ Read the reference for the task.
 | Find and fix failing, flaky, and slow tests, quarantine a failing or flaky test, limit concurrency for tests that fail under load, pass rates, past runs | [reference/investigate.md](reference/investigate.md)                                                        |
 | Run code inside a live test: inspect a failing step, find locators, try the next steps of a test                                                         | [reference/live-test.md](reference/live-test.md)                                                            |
 
-If the reference does not cover the case, fetch the matching page from `https://endform.dev/docs/llms.txt` and read only that page.
+If the reference does not cover the case, say so and point the user to https://endform.dev/docs.
 
 ## Login and organization
 
 Run the command the task needs and react to its output:
 
-- **"No Endform credentials found"** or **"Unauthorized"**: run `npx endform@latest login` and ask the user to finish browser authorization. Resume the task once login succeeds. Do not work around a missing login.
+- **"No Endform credentials found"** or **"Unauthorized"**: run `npx endform@latest login`, show the URL it prints and ask the user to finish browser authorization. If it says login runs in two steps, then run `npx endform@latest login --resume-pending` and keep it running until it completes. Resume the task once login succeeds. Do not work around a missing login.
 - **"Organization selection is required"**: ask the user which organization, then pass `--organization-id <id>` on every `analytics`, `samples`, `test`, `live-test`, `quarantine`, `connect`, and `api-key` command.
 
 Commands in the references show `--organization-id <organization-id>`. Fill in the chosen id, or leave the flag out until the CLI asks for an organization.

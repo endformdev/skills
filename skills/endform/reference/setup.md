@@ -4,7 +4,7 @@ Endform is a drop-in replacement for the Playwright test runner: `npx endform@la
 
 ## Steps
 
-1. Run `npx endform@latest login` so the CLI can run tests on Endform for this account. It prints a URL to approve and tells you which command to run next, so show the URL and follow its output until the login completes.
+1. Run `npx endform@latest login` so the CLI can run tests on Endform for this account. Show the URL it prints for approval in the browser. If it says login runs in two steps, then run `npx endform@latest login --resume-pending` and keep it running until the login completes.
 2. Find the Playwright project:
    - If this repository already has one, use it and leave its tests as they are.
    - If not, add `@playwright/test` as a dev dependency, create `playwright.config.ts` with `testDir` set to `./tests`, `forbidOnly: !!process.env.CI`, and a single chromium project, and add `test-results/` and `playwright-report/` to `.gitignore`. Leave out `workers` and `reporter` settings; Endform handles those. Then ask which three or four pages or flows matter most, and write one small test for each with stable locators such as roles and labels. Then check they pass with `npx endform@latest test --organization-id <organization-id>`.
@@ -31,7 +31,7 @@ Endform is a drop-in replacement for the Playwright test runner: `npx endform@la
    - tests fail or time out under load because the target cannot handle many tests at once, such as a local server, a staging database, or a payment sandbox: `concurrentTestLimits`, for example `[{ scope: "within-suite-run", limit: 40 }]`, or with `label: "tag:@checkout"` to limit only the tests that hit the bottleneck.
    - To add a setting, use the repository's existing Endform config, in this directory or a parent up to the repository root.
    - Convert a legacy `endform.jsonc` or `endform.json` with `npx endform@latest migrate-config` first, since a new `endform.config.ts` next to it silently replaces it.
-   - If there is none, add `endform` as a dev dependency, create `endform.config.ts` next to `playwright.config.ts` using `defineEndformConfig` from `"endform"`, and read https://endform.dev/docs/_llms-txt/run-and-configure-endform.txt for its options.
+   - If there is none, add `endform` as a dev dependency, create `endform.config.ts` next to `playwright.config.ts` using `defineEndformConfig` from `"endform"`, for example `export default defineEndformConfig({ additionalFiles: ["user-state/*"] });`, with only the settings listed above.
 5. When the setup is done, run `npx endform@latest test --organization-id <organization-id>`. It takes Playwright's test selection and run flags, such as file filters, `--grep`, `--project`, and `--retries`, but not Playwright's --workers, --headed, or --ui. Stopping the command cancels the run, so give it a timeout longer than the suite takes. Fix configuration problems and run it again until the run completes. If tests fail for reasons unrelated to the Endform setup, report them instead of changing the tests. Then give the dashboard link it prints.
 
 ## Requirements
