@@ -116,7 +116,7 @@ You can also add both to one agent by giving them different names, as the comman
 
 ## Data and privacy
 
-Your agent runs the [Endform CLI from npm](https://www.npmjs.com/package/endform). It sends the Playwright tests you select, what they need to run, and their results to Endform. The remote MCP server only uses data already in your Endform account. See our [privacy policy](https://endform.dev/privacy) for more details.
+Your agent may run the [Endform CLI from npm](https://www.npmjs.com/package/endform). The CLI sends the Playwright tests you select, what they need to run, and their results to Endform. The remote MCP server only uses data already in your Endform account. See our [privacy policy](https://endform.dev/privacy) for more details.
 
 ## Repository layout
 
