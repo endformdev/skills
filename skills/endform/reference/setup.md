@@ -2,6 +2,12 @@
 
 Endform is a drop-in replacement for the Playwright test runner: `npx endform@latest test` replaces `playwright test` and runs every test on its own machine. The tests stay as they are; setup adds a few settings to `playwright.config.ts`.
 
+## Run setup
+
+Run `npx endform@latest setup` from the directory that contains `playwright.config.ts`, with `--config` when it finds several. It finds the suite, checks requirements, logs in, picks the organization, and runs the suite once. It never edits files: when it stops, it prints what to change, run, or ask the user, so a non-zero exit is an instruction, not a crash. Do what it prints, ask the user when it asks a question, and run it again until it passes. Then do what it lists as left, asking the user first where it says so, and give the dashboard link it prints.
+
+The steps below cover what `setup` leaves to you, such as writing a first suite, settings it does not suggest, and CI.
+
 ## Steps
 
 1. Run `npx endform@latest login` so the CLI can run tests on Endform for this account. Show the URL it prints for approval in the browser. If it says login runs in two steps, then run `npx endform@latest login --resume-pending` and keep it running until the login completes.

@@ -1,8 +1,10 @@
 # Find and fix failing, flaky, and slow tests
 
-Both commands print JSON and use the active login or `ENDFORM_API_KEY`. Users in several organizations must pass `--organization-id <id>`.
+Contents: [analytics](#analytics), [samples](#samples), [test-attempt](#test-attempt), [Filters](#filters), [Reading the output](#reading-the-output), [Fix a failing or flaky test](#fix-a-failing-or-flaky-test), [Quarantine a test](#quarantine-a-test), [Limit concurrency](#limit-concurrency).
 
-Two datasets: `suite-runs` is one Endform run of a suite, `test-runs` is one test inside a suite run. Use `analytics` to find a trend, then `samples` to inspect the matching executions.
+`analytics` and `samples` print JSON and use the active login or `ENDFORM_API_KEY`. Users in several organizations must pass `--organization-id <id>`.
+
+Two datasets: `suite-runs` is one Endform run of a suite, `test-runs` is one test inside a suite run. Use `analytics` to find a trend, `samples` to inspect the matching executions, and `test-attempt` to see what one attempt did.
 
 ## analytics
 
@@ -12,7 +14,7 @@ Two datasets: `suite-runs` is one Endform run of a suite, `test-runs` is one tes
 npx endform@latest analytics suite-runs --metric count --group-by outcome
 npx endform@latest analytics suite-runs --metric pass-rate --group-by branch --period 2W
 npx endform@latest analytics test-runs --metric pass-rate --group-by test --where 'branch = main'
-npx endform@latest analytics test-runs --metric average-duration --group-by project --period 24H --ending-at 2026-08-11T12:00:00Z
+npx endform@latest analytics test-runs --metric average-duration --group-by project --period 24H --ending-at <iso-timestamp>
 ```
 
 ## samples
@@ -34,6 +36,22 @@ npx endform@latest samples test-runs --where 'commitSha = <head-sha>, testRun.ou
 
 When `analytics` or `samples` finds nothing, the response includes `organizationHasRuns`: `true` means the organization has runs but none match, and `false` means it has never run its own tests.
 
+## test-attempt
+
+Each test-run sample lists its attempts in `testAttempts`, and an attempt's `id` is the test attempt ID.
+
+```bash
+npx endform@latest test-attempt inspect <testAttemptId>
+npx endform@latest test-attempt step <testAttemptId> --span-id b970cda23596ca62
+npx endform@latest test-attempt replay <testAttemptId> --highlight "b970cda23596ca62 Pay button stays disabled"
+```
+
+- `inspect` lists every step with its span ID and says whether the attempt behaved as the test usually does, and what changed if not. For a failed or changed attempt it also shows a reference run, a recent passing run of the same test. It downloads both traces and prints where they are.
+- `step` shows screenshots at the start and end of a span, and the requests, console messages, and errors in between. Repeat `--span-id`, up to 10 times, to cover a range. Pass the reference run's attempt ID to see what the passing run did.
+- `replay` prints links that play the attempt beside its reference run, opened on the failed step or the first `--highlight`. Each highlight is one quoted value: a span ID, optionally `:start`, and a caption.
+
+To tell whether a change caused a failure, inspect the latest attempts on its branch (`--where 'branch = <name>'`, the head branch for a pull request). A failure can come from the change, a flaky test, or the default branch. Give a replay with the answer so the user can check it.
+
 ## Filters
 
 `--where` takes comma-separated `key operator value` clauses. Run `npx endform@latest samples --help` for the complete list of keys and operators. The keys map directly to response paths, so a filter on `testRun.outcome` reads the same field in the output. Suite run outcomes are `pass` or `fail`, test run and attempt outcomes can also be `skip`, durations are seconds.
@@ -48,7 +66,7 @@ Filter to failures and keep limits small. Summarize an error to its first meanin
 
 1. Find the pattern with `analytics`: when the test started failing or retrying, on which branches, and in which projects. A test that passes only after retries (`testRun.testAttemptsCount > 1`) is flaky; one that fails on every run since a commit is broken.
 2. Read the evidence with `samples`: the error message and location of each attempt. The same error on every attempt points at one cause; changing errors point at timing or shared state. Failures that appear only when many tests run at once point at load, see [Limit concurrency](#limit-concurrency).
-3. Reproduce it in a live test, see [live-test.md](live-test.md): pause before the failing step and inspect the page.
+3. See what the failing attempt did with `test-attempt inspect` and `step`, and compare it with its reference run. If that does not explain it, reproduce it in a live test, see [live-test.md](live-test.md): pause before the failing step and inspect the page.
 4. Fix the test or the app. Wait for what the test needs instead of adding `page.waitForTimeout()` or `force: true`: use web-first assertions such as `await expect(page.getByRole("button", { name: "Pay" })).toBeEnabled()`, which retry until they pass, wait for a request with `page.waitForResponse()`, and find elements by role, label, or text instead of CSS selectors.
 5. Check the fix on Endform. The repeats run in parallel, so this takes about as long as one run:
 
@@ -56,7 +74,7 @@ Filter to failures and keep limits small. Summarize an error to its first meanin
    npx endform@latest test tests/checkout.spec.ts:12 --repeat-each 20 --retries 0
    ```
 
-   With the local MCP server, call `suite_run_start` with `testFileFilters: ["tests/checkout.spec.ts:12"]`, `repeatEach: 20`, and `retries: 0`.
+   With the local MCP server, call `endform:suite_run_start` with `testFileFilters: ["tests/checkout.spec.ts:12"]`, `repeatEach: 20`, and `retries: 0`.
 
 ## Quarantine a test
 
@@ -64,7 +82,7 @@ A quarantined test still runs on every suite run, but its failures no longer fai
 
 ```bash
 npx endform@latest quarantine list
-npx endform@latest quarantine create --suite-id <suiteId> --test-id <testId> --branch main --reason "Flaky payment step" --ends-at 2026-11-01T00:00:00Z
+npx endform@latest quarantine create --suite-id <suiteId> --test-id <testId> --branch main --reason "Flaky payment step" --ends-at <future-iso-timestamp>
 npx endform@latest quarantine deactivate <ruleId>
 ```
 
