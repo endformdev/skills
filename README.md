@@ -23,7 +23,7 @@ Endform also has a local MCP server that can debug a test live in your checkout.
 
 ## Data and privacy
 
-The skill runs the Endform CLI from npm. It sends the Playwright tests you select, what they need to run, and their results to Endform. The remote MCP server only uses data already in your Endform account. See our [privacy policy](https://endform.dev/privacy) for more details.
+The skill runs the [Endform CLI from npm](https://www.npmjs.com/package/endform). It sends the Playwright tests you select, what they need to run, and their results to Endform. The remote MCP server only uses data already in your Endform account. See our [privacy policy](https://endform.dev/privacy) for more details.
 
 ## License
 
